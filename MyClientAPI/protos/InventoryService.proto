@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+option csharp_namespace = "GRPS_Test.Protos";
+
+import "google/protobuf/timestamp.proto";
+
+import "google/protobuf/empty.proto";
+
+
+service InventoryService{
+    rpc GetProdById(prodIdMsg) returns (ProdExistResponse);
+    rpc AddProduct(productMsg) returns (productMsg);
+    rpc UpdateProduct(productMsg) returns (productMsg);
+    rpc GetAllProd(google.protobuf.Empty) returns (ProductListResponse );
+
+    rpc AddBulkProd(stream productMsg) returns(NumOfInsertedRowsMsg);
+
+   rpc GetProductsByCriteria(ProductCriteriaMsg) returns (stream productMsg);
+
+}
+
+message ProductCriteriaMsg {
+    ProductCategory category = 1; // Optional: filter by category
+    bool orderByPrice = 2;
+}
+
+message prodIdMsg {
+int32 prodId = 1;
+}
+
+message NumOfInsertedRowsMsg {
+    int32 numOfInsertedRows = 1;
+}
+
+message productMsg {
+
+    int32 prodId = 1;
+    string name = 2;
+    int32 quantity = 3;
+    float price = 4;
+    google.protobuf.Timestamp expiredates = 5;
+    ProductCategory category = 6;
+}
+
+message ProdExistResponse { bool exists = 1;}
+
+message ProductListResponse {
+    repeated productMsg products = 1;
+}
+
+enum ProductCategory {
+
+    CATEGORY_UNSPECIFIED = 0;
+    LAPTOP = 1;
+    MOBILE = 2;
+    FOOD = 3;
+}
