@@ -1,4 +1,4 @@
-﻿namespace ClientAPI.Services
+﻿namespace MyClientAPI.Services
 {
     public class ApiKeyProviderService : IApiKeyProviderService
     {

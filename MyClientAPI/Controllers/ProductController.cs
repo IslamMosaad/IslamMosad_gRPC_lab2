@@ -1,4 +1,4 @@
-﻿using ClientAPI.Models;
+﻿using MyClientAPI.Models;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using GRPS_Test.Protos;
@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using static GRPS_Test.Protos.InventoryService;
 
-namespace ClientAPI.Controllers
+namespace MyClientAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -57,14 +57,14 @@ namespace ClientAPI.Controllers
                 price = p.Price,
                 quantity = p.Quantity,
                 ExpireDate = p.Expiredates.ToDateTime(),
-                Category = (ClientAPI.Models.ProductCategory)p.Category
+                Category = (MyClientAPI.Models.ProductCategory)p.Category
             }).ToList();
 
             return Ok(products);
         }
 
         [HttpPost]
-        [Route("AddBulkProd")]
+        [Route("BulkProduct")]
         public async Task<ActionResult> addBulkProd(List<Product> products)
         {
             var call = client.AddBulkProd();
@@ -92,7 +92,7 @@ namespace ClientAPI.Controllers
 
 
         [HttpGet]
-        [Route("GetFilteredProducts")]
+        [Route("GetProductsWithFilter")]
         public async Task<ActionResult> GetFilteredProducts(Models.ProductCategory category = 0, bool orderByPrice = false)
         {
             var request = new ProductCriteriaMsg

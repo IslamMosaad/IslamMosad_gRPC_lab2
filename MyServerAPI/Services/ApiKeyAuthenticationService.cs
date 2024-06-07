@@ -1,4 +1,4 @@
-﻿namespace ServerAPI.Services
+﻿namespace MyServerAPI.Services
 {
     public class ApiKeyAuthenticationService : IApiKeyAuthenticationService
     {

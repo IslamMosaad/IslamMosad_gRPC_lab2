@@ -1,16 +1,12 @@
-using ClientAPI.Services;
-using ClientAPI.Models;
-using Google.Protobuf.WellKnownTypes;
-using Grpc.Core;
-using GRPS_Test.Protos;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+
+using MyClientAPI.Services;
 using static GRPS_Test.Protos.InventoryService;
+
+
 namespace MyClientAPI
 {
     public class Program
     {
-
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);

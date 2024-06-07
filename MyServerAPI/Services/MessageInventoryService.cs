@@ -2,11 +2,9 @@
 using Grpc.Core;
 using GRPS_Test.Protos;
 using Microsoft.AspNetCore.Authorization;
-using ServerAPI.Models;
-using System.Xml.Linq;
 using static GRPS_Test.Protos.InventoryService;
-
-namespace ServerAPI.Services
+using MyServerAPI.Models;
+namespace MyServerAPI.Services
 {
     public class MessageInventoryService : InventoryServiceBase
     {
@@ -31,7 +29,7 @@ namespace ServerAPI.Services
                 price = request.Price,
                 quantity = request.Quantity,
                 ExpireDate = request.Expiredates.ToDateTime(), // Convert Google protobuf Timestamp to DateTime
-                Category = (ServerAPI.Models.ProductCategory)request.Category,
+                Category = (MyServerAPI.Models.ProductCategory)request.Category,
             };
 
             ProductList.Products.Add(newProd);
@@ -47,7 +45,7 @@ namespace ServerAPI.Services
                 product.price = request.Price;
                 product.quantity = request.Quantity;
                 product.ExpireDate = request.Expiredates.ToDateTime(); // Convert Google protobuf Timestamp to DateTime
-                product.Category = (ServerAPI.Models.ProductCategory)request.Category;          
+                product.Category = (MyServerAPI.Models.ProductCategory)request.Category;          
 
             }
             return await Task.FromResult(request);
@@ -89,7 +87,7 @@ namespace ServerAPI.Services
             var filteredProducts = ProductList.Products.AsQueryable();
 
             if (request.Category != GRPS_Test.Protos.ProductCategory.CategoryUnspecified)
-                filteredProducts = filteredProducts.Where(p => p.Category == (ServerAPI.Models.ProductCategory)request.Category);
+                filteredProducts = filteredProducts.Where(p => p.Category == (MyServerAPI.Models.ProductCategory)request.Category);
             
             // Optional: Order by price if requested
             if (request.OrderByPrice)      

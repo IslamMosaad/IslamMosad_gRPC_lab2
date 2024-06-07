@@ -1,4 +1,4 @@
-﻿namespace ServerAPI.Models
+﻿namespace MyServerAPI.Models
 {
     public static class ProductList
     {
