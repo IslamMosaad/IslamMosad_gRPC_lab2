@@ -33,7 +33,7 @@ namespace ClientAPI.Controllers
                 Quantity = product.quantity,
                 Expiredates = Timestamp.FromDateTime(product.ExpireDate.ToUniversalTime()), // Convert DateTime to UTC and then to Timestamp
                 Category = (GRPS_Test.Protos.ProductCategory)product.Category,
-                               
+
             };
             if (res.Exists == true)
             {
@@ -57,7 +57,7 @@ namespace ClientAPI.Controllers
                 price = p.Price,
                 quantity = p.Quantity,
                 ExpireDate = p.Expiredates.ToDateTime(),
-                Category = (ClientAPI.Models.ProductCategory) p.Category
+                Category = (ClientAPI.Models.ProductCategory)p.Category
             }).ToList();
 
             return Ok(products);
@@ -65,10 +65,10 @@ namespace ClientAPI.Controllers
 
         [HttpPost]
         [Route("AddBulkProd")]
-       public async Task<ActionResult> addBulkProd(List<Product> products)
+        public async Task<ActionResult> addBulkProd(List<Product> products)
         {
             var call = client.AddBulkProd();
-            foreach(var product in products)
+            foreach (var product in products)
             {
                 await call.RequestStream.WriteAsync(new productMsg()
                 {

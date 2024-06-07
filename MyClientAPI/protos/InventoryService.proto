@@ -20,7 +20,7 @@ service InventoryService{
 }
 
 message ProductCriteriaMsg {
-    ProductCategory category = 1; // Optional: filter by category
+    ProductCategory category = 1; 
     bool orderByPrice = 2;
 }
 
